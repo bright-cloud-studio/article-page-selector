@@ -11,72 +11,17 @@
 **/
 
  /* Extend the tl_user palettes */
-foreach ($GLOBALS['TL_DCA']['tl_user']['palettes'] as $k => $v) {
-    $GLOBALS['TL_DCA']['tl_user']['palettes'][$k] = str_replace('email;', 'email;{add_user_fields_legend},user_image,user_image_size,user_image_meta,user_bio;', $v);
+foreach ($GLOBALS['TL_DCA']['tl_article']['palettes'] as $k => $v) {
+    $GLOBALS['TL_DCA']['tl_article']['palettes'][$k] = str_replace('inColumn;', 'inColumn;{article_page_selector_legend},selected_page;', $v);
 }
 
 /* Add fields to tl_user */
-$GLOBALS['TL_DCA']['tl_user']['fields']['user_image'] = array
+$GLOBALS['TL_DCA']['tl_article']['fields']['selected_page'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['user_image'],
-	'inputType'               => 'fileTree',
-	'default'		  => '',
-	'search'                  => true,
-	'eval' => [
-		'tl_class' => 'long',
-		'fieldType' => 'radio', 
-		'filesOnly' => true
-	],
-	'sql'                    => ['type' => 'binary', 'length' => 16, 'notnull' => false, 'fixed' => true]
-);
-
-$GLOBALS['TL_DCA']['tl_user']['fields']['user_image_size'] = array
-(
-	'label'                 => &$GLOBALS['TL_LANG']['tl_user']['user_image_size'],
-	'exclude'               => true,
-	'inputType'             => 'imageSize',
-	'options'               => \Contao\System::getImageSizes(),
-	'reference'             => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                  => [
-		'rgxp'=>'natural',
-		'includeBlankOption'=>true,
-		'nospace'=>true,
-		'helpwizard'=>true,
-		'tl_class'=>'long'
-	],
-	'sql'                   => ['type' => 'string', 'length' => 64, 'default' => '']
-);
-
-$GLOBALS['TL_DCA']['tl_user']['fields']['user_image_meta'] = array
-(
-	'label'                 => &$GLOBALS['TL_LANG']['tl_user']['user_image_meta'],
-	'inputType'             => 'metaWizard',
-	'options'               => \Contao\System::getImageSizes(),
-	'reference'             => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                  => [
-		'allowHtml'=>true,
-		'nospace'=>true,
-		'metaFields'    => array
-		(
-			'title'           => 'maxlength="255"',
-			'alt'             => 'maxlength="255"',
-			'link'            => array('attributes'=>'maxlength="255"', 'dcaPicker'=>true),
-			'caption'         => array('type'=>'textarea')
-		),
-		'helpwizard'=>true,
-		'tl_class'=>'long',
-		'dcaPicker'=>true
-	],
-	'sql'                   => "blob NULL"
-);
-
-$GLOBALS['TL_DCA']['tl_user']['fields']['user_bio'] = array
-(
-	'label'			=> &$GLOBALS['TL_LANG']['tl_user']['user_bio'],
-	'inputType'		=> 'textarea',
-	'eval'                	=> [
-		'rte'=>'tinyMCE',
-		'tl_class'=>'long'
-	],
-	'sql'                   => "mediumtext NOT NULL default ''"
+	'label'                   => &$GLOBALS['TL_LANG']['tl_article']['selected_page'],
+	'inputType'               => 'pageTree',
+	'foreignKey'              => 'tl_page.title',
+	'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
+	'sql'                     => "int(10) unsigned NOT NULL default 0",
+	'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 );
