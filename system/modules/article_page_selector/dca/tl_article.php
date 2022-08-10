@@ -12,7 +12,7 @@
 
  /* Extend the tl_user palettes */
 foreach ($GLOBALS['TL_DCA']['tl_article']['palettes'] as $k => $v) {
-    $GLOBALS['TL_DCA']['tl_article']['palettes'][$k] = str_replace('inColumn;', 'inColumn;{article_page_selector_legend},selected_page;', $v);
+    $GLOBALS['TL_DCA']['tl_article']['palettes'][$k] = str_replace('printable;', 'printable;{article_page_selector_legend},selected_page;', $v);
 }
 
 /* Add fields to tl_user */
