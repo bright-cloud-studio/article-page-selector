@@ -1,0 +1,32 @@
+{
+    "name": "bright-cloud-studio/article-page-selector",
+    "description": "Adds a page selector to an article's settings, so the article can be wrapped in a link to the selected page",
+    "keywords": ["contao", "article", "page", "selector", "bright", "cloud", "studio"],
+    "type": "contao-bundle",
+    "homepage": "https://brightcloudstudio.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bright Cloud Studio",
+            "homepage": "https://brightcloudstudio.com",
+            "email": "mark@brightcloudstudio.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/bright-cloud-studio/article-page-selector/issues",
+        "source": "https://github.com/bright-cloud-studio/article-page-selector"
+    },
+    "require": {
+        "php": "^8.2",
+        "contao/core-bundle": "^5.7"
+    },
+    "extra": {
+        "contao-manager-plugin": "Bcs\\ArticlePageSelectorBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bcs\\ArticlePageSelectorBundle\\": "src"
+        }
+    }
+}
